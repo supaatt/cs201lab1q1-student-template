@@ -28,7 +28,7 @@ public class NumbersArray {
         }
         return maxVal;
     
-    
+
     }
 
     public static Integer[] findDuplicates(Integer[] input) {
@@ -41,7 +41,7 @@ public class NumbersArray {
             }
         }
         duplicateHashMap.values().removeIf(value -> value == 1);
-        return duplicateHashMap.keySet().toArray(Integer[]::new);
+        return duplicateHashMap.keySet().toArray(new Integer[0]);
     }
 
     public static Integer[] findUnique(Integer[] input) {
@@ -55,7 +55,7 @@ public class NumbersArray {
         }
         uniqueHashMap.values().removeIf(value -> value > 1);
 
-        return uniqueHashMap.keySet().toArray(Integer[]::new);
+        return uniqueHashMap.keySet().toArray(new Integer[0]);
     }
 }
 
