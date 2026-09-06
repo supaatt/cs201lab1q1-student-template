@@ -22,42 +22,28 @@ public class NumbersArray {
     // Write your methods here
     public static int findMax(Integer[] arr) {
         int max = arr[0];
-        for (int num : arr) {
-            if (num > max) {
-                max = num;
-            }
-        }
+        for (int n : arr) if (n > max) max = n;
         return max;
     }
 
     public static Integer[] findDuplicates(Integer[] arr) {
-        Map<Integer, Integer> counts = new LinkedHashMap<>();
-        for (int num : arr) {
-            counts.put(num, counts.getOrDefault(num, 0) + 1);
+        Map<Integer, Integer> count = new LinkedHashMap<>();
+        for (int n : arr) count.merge(n, 1, Integer::sum);
+        List<Integer> dup = new ArrayList<>();
+        for (Map.Entry<Integer, Integer> e : count.entrySet()) {
+            if (e.getValue() > 1) dup.add(e.getKey());
         }
-
-        List<Integer> duplicates = new ArrayList<>();
-        for (Map.Entry<Integer, Integer> entry : counts.entrySet()) {
-            if (entry.getValue() > 1) {
-                duplicates.add(entry.getKey());
-            }
-        }
-        return duplicates.toArray(new Integer[0]);
+        return dup.toArray(new Integer[0]);
     }
 
     public static Integer[] findUnique(Integer[] arr) {
-        Map<Integer, Integer> counts = new LinkedHashMap<>();
-        for (int num : arr) {
-            counts.put(num, counts.getOrDefault(num, 0) + 1);
+        Map<Integer, Integer> count = new LinkedHashMap<>();
+        for (int n : arr) count.merge(n, 1, Integer::sum);
+        List<Integer> uniq = new ArrayList<>();
+        for (Map.Entry<Integer, Integer> e : count.entrySet()) {
+            if (e.getValue() == 1) uniq.add(e.getKey());
         }
-
-        List<Integer> unique = new ArrayList<>();
-        for (Map.Entry<Integer, Integer> entry : counts.entrySet()) {
-            if (entry.getValue() == 1) {
-                unique.add(entry.getKey());
-            }
-        }
-        return unique.toArray(new Integer[0]);
+        return uniq.toArray(new Integer[0]);
     }
 }
 
