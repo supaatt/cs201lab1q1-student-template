@@ -27,6 +27,8 @@ public class NumbersArray {
                 maxVal = input[i];
         }
         return maxVal;
+    
+    
     }
 
     public static Integer[] findDuplicates(Integer[] input) {
