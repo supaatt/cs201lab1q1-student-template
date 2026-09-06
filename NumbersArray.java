@@ -20,30 +20,40 @@ public class NumbersArray {
     }
 
     // Write your methods here
-    public static int findMax(Integer[] arr) {
-        int max = arr[0];
-        for (int n : arr) if (n > max) max = n;
-        return max;
+    public static int findMax(Integer[] input) {
+        int maxVal = input[0];
+        for (int i = 1; i < input.length; i++) {
+            if (input[i] > maxVal)
+                maxVal = input[i];
+        }
+        return maxVal;
     }
 
-    public static Integer[] findDuplicates(Integer[] arr) {
-        Map<Integer, Integer> count = new LinkedHashMap<>();
-        for (int n : arr) count.merge(n, 1, Integer::sum);
-        List<Integer> dup = new ArrayList<>();
-        for (Map.Entry<Integer, Integer> e : count.entrySet()) {
-            if (e.getValue() > 1) dup.add(e.getKey());
+    public static Integer[] findDuplicates(Integer[] input) {
+        Map<Integer, Integer> duplicateHashMap = new HashMap<>();
+        for (Integer elem : input) {
+            if (duplicateHashMap.get(elem) == null) {
+                duplicateHashMap.put(elem, 1);
+            } else {
+                duplicateHashMap.put(elem, duplicateHashMap.get(elem) + 1);
+            }
         }
-        return dup.toArray(new Integer[0]);
+        duplicateHashMap.values().removeIf(value -> value == 1);
+        return duplicateHashMap.keySet().toArray(Integer[]::new);
     }
 
-    public static Integer[] findUnique(Integer[] arr) {
-        Map<Integer, Integer> count = new LinkedHashMap<>();
-        for (int n : arr) count.merge(n, 1, Integer::sum);
-        List<Integer> uniq = new ArrayList<>();
-        for (Map.Entry<Integer, Integer> e : count.entrySet()) {
-            if (e.getValue() == 1) uniq.add(e.getKey());
+    public static Integer[] findUnique(Integer[] input) {
+        Map<Integer, Integer> uniqueHashMap = new HashMap<>();
+        for (Integer elem : input) {
+            if (uniqueHashMap.get(elem) == null) {
+                uniqueHashMap.put(elem, 1);
+            } else {
+                uniqueHashMap.put(elem, uniqueHashMap.get(elem) + 1);
+            }
         }
-        return uniq.toArray(new Integer[0]);
+        uniqueHashMap.values().removeIf(value -> value > 1);
+
+        return uniqueHashMap.keySet().toArray(Integer[]::new);
     }
 }
 
