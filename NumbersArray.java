@@ -56,6 +56,8 @@ public class NumbersArray {
         uniqueHashMap.values().removeIf(value -> value > 1);
 
         return uniqueHashMap.keySet().toArray(new Integer[0]);
+
+        
     }
 }
 
